@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Pastel Love Countdown 2.0 ⏳💗 – Garden Points</title>
+
+    <!-- Kanit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --pink-50: #FFF5FA;
+            --pink-100: #FFEAF4;
+            --pink-200: #FFD6E8;
+            --pink-300: #FFB8D4;
+            --pink-400: #FF9EBF;
+            --pink-500: #FF79AC;
+            --rose-500: #F06292;
+            --text: #5a4d52;
+            --shadow: 0 10px 24px rgba(255, 158, 191, .35);
+        }
+
+        * {
+            box-sizing: border-box;
+            min-width: 0
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: "Kanit", system-ui, -apple-system, Segoe UI, Roboto;
+            color: var(--text);
+            overflow-x: hidden;
+            background: radial-gradient(1200px 1200px at 10% 0%, #fff 0%, var(--pink-50) 35%, #ffeef6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .app {
+            width: min(1000px, 100%);
+            margin-inline: auto
+        }
+
+        .header {
+            text-align: center;
+            margin: 6px 0 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .title {
+            font-weight: 600;
+            font-size: clamp(20px, 4.5vw, 34px);
+            color: var(--rose-500);
+            letter-spacing: .3px
+        }
+
+        .subtitle {
+            opacity: .85;
+            font-size: clamp(12px, 2.8vw, 16px);
+            padding: 0 8px
+        }
+
+        .card {
+            background: linear-gradient(180deg, var(--pink-100), #fff 90%);
+            border: 1px solid var(--pink-200);
+            border-radius: 24px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 14px
+        }
+
+        @media (max-width:900px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .box {
+            background: #fff;
+            border: 1px solid var(--pink-200);
+            border-radius: 18px;
+            padding: 14px;
+        }
+
+        .box h3 {
+            margin: 0 0 10px;
+            font-weight: 600;
+            color: #cf4d82
+        }
+
+        .btn {
+            background: var(--pink-400);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: .2s transform, .2s background;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font: inherit;
+            max-width: 100%
+        }
+
+        .btn:hover {
+            background: var(--pink-500);
+            transform: translateY(-1px)
+        }
+
+        .btn.ghost {
+            background: #fff;
+            color: #cf4d82;
+            border: 1px solid var(--pink-300)
+        }
+
+        .btn.link {
+            background: #fff;
+            color: #cf4d82;
+            border: 1px dashed var(--pink-300)
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px
+        }
+
+        @media (max-width:540px) {
+            .countdown {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        .dd {
+            background: linear-gradient(180deg, #fff, var(--pink-100));
+            border: 1px solid var(--pink-200);
+            border-radius: 18px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .num {
+            font-size: clamp(26px, 6vw, 48px);
+            font-weight: 700;
+            color: #d34f8a
+        }
+
+        .lab {
+            opacity: .75;
+            margin-top: 4px
+        }
+
+        .progress {
+            height: 12px;
+            background: #ffe5f0;
+            border-radius: 999px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--pink-200)
+        }
+
+        .bar {
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 0%;
+            background: linear-gradient(90deg, var(--pink-300), var(--pink-400));
+            border-radius: 999px
+        }
+
+        .pct {
+            font-size: .95rem;
+            text-align: right;
+            margin-top: 6px;
+            opacity: .8;
+            overflow-wrap: anywhere
+        }
+
+        .quote {
+            background: linear-gradient(180deg, #fff, var(--pink-100));
+            border: 1px solid var(--pink-200);
+            border-radius: 18px;
+            padding: 14px;
+        }
+
+        .quote p {
+            margin: 0;
+            font-size: 1.05rem
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 6px 0 10px
+        }
+
+        .tab {
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--pink-300);
+            background: #fff;
+            font-size: .95rem;
+            cursor: pointer
+        }
+
+        .tab.active {
+            background: var(--pink-400);
+            color: #fff;
+            border-color: var(--pink-400)
+        }
+
+        .panel {
+            display: none
+        }
+
+        .panel.show {
+            display: block
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 110px 1fr;
+            gap: 12px;
+            align-items: center
+        }
+
+        @media (max-width:560px) {
+            .row {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .big {
+            font-size: 56px;
+            text-align: center;
+            line-height: 1
+        }
+
+        .badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap
+        }
+
+        .badge {
+            border: 1px dashed var(--pink-300);
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-size: .85rem
+        }
+
+        .store {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px
+        }
+
+        .price {
+            font-size: 12px;
+            opacity: .8;
+            margin-left: 6px
+        }
+
+        select {
+            max-width: 100%
+        }
+
+        select:disabled {
+            opacity: .5
+        }
+
+        .quest {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 8px;
+            border: 1px solid var(--pink-200);
+            border-radius: 12px;
+            margin: 6px 0;
+            background: #fff
+        }
+
+        .quest small {
+            opacity: .75
+        }
+
+        .quest .btn {
+            padding: 6px 10px;
+            border-radius: 10px
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            z-index: 80
+        }
+
+        .modal.show {
+            display: flex
+        }
+
+        .modal::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, .25);
+        }
+
+        .modal .inner {
+            position: relative;
+            background: #fff;
+            border-radius: 18px;
+            border: 1px solid var(--pink-200);
+            width: min(760px, 100%);
+            max-height: 85vh;
+            overflow: auto;
+            box-shadow: var(--shadow);
+            padding: 14px
+        }
+
+        .modal h3 {
+            margin: 0 0 10px;
+            color: #cf4d82
+        }
+
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            border: none;
+            background: #fff;
+            border: 1px solid var(--pink-300);
+            border-radius: 10px;
+            padding: 6px 8px;
+            cursor: pointer
+        }
+
+        .summary-row {
+            display: grid;
+            grid-template-columns: 42px 1fr auto;
+            gap: 10px;
+            align-items: center;
+            padding: 8px;
+            border: 1px solid var(--pink-200);
+            border-radius: 12px;
+            margin: 6px 0;
+            background: #fff
+        }
+
+        .summary-name {
+            font-weight: 600
+        }
+
+        .bar-sm {
+            height: 10px;
+            background: #ffe5f0;
+            border-radius: 999px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--pink-200)
+        }
+
+        .bar-sm>span {
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 0%;
+            background: linear-gradient(90deg, var(--pink-300), var(--pink-400))
+        }
+
+        .tag {
+            font-size: .8rem;
+            border: 1px dashed var(--pink-300);
+            border-radius: 999px;
+            padding: 3px 8px
+        }
+
+        .footer {
+            opacity: .7;
+            text-align: center;
+            margin-top: 14px;
+            font-size: .9rem
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%) translateY(40px);
+            opacity: 0;
+            transition: all .4s cubic-bezier(.22, 1, .36, 1);
+            z-index: 99;
+            will-change: transform, opacity;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast .inner {
+            background: #fff;
+            border: 2px solid var(--pink-200);
+            padding: 12px 16px;
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+        }
+
+        .hearts {
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: 90
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 18px;
+            animation: floatUp 2.8s ease-in forwards;
+            opacity: .9
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(.9);
+                opacity: .4
+            }
+
+            60% {
+                opacity: 1
+            }
+
+            100% {
+                transform: translateY(-120vh) scale(1.3);
+                opacity: 0
+            }
+        }
+
+        /* Encouragement chips */
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px
+        }
+
+        .chip {
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--pink-300);
+            background: #fff;
+            cursor: pointer;
+            font-size: .95rem
+        }
+
+        .chip:hover {
+            background: #ffeef6
+        }
+
+        @media (max-width:420px) {
+            .num {
+                font-size: clamp(22px, 7vw, 40px)
+            }
+
+            .row .big {
+                font-size: 48px
+            }
+
+            .badge {
+                font-size: .8rem
+            }
+
+            .btn {
+                padding: 10px 12px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <div class="header">
+            <div class="title">⏳ Pastel Love Countdown 2.0</div>
+            <div class="subtitle">เริ่มนับ 14 ต.ค. 2025 • สิ้นสุด 13 ก.พ. 2026 17:00 (ไทย) • มินิเกมสวน & เพ็ทคาเฟ่ 🌱🐾
+            </div>
+        </div>
+
+        <div class="card grid">
+            <!-- ซ้าย: Countdown -->
+            <section class="box">
+                <h3>สถานะความคืบหน้า</h3>
+                <div style="margin:8px 0 10px; font-weight:600; color:#cf4d82">
+                    นับถอยหลังสู่วันพิเศษของเรา 💗 — 13 ก.พ. 2026 • 17:00 น.
+                </div>
+
+                <div class="countdown">
+                    <div class="dd">
+                        <div class="num" id="d">–</div>
+                        <div class="lab">วัน</div>
+                    </div>
+                    <div class="dd">
+                        <div class="num" id="h">–</div>
+                        <div class="lab">ชั่วโมง</div>
+                    </div>
+                    <div class="dd">
+                        <div class="num" id="m">–</div>
+                        <div class="lab">นาที</div>
+                    </div>
+                    <div class="dd">
+                        <div class="num" id="s">–</div>
+                        <div class="lab">วินาที</div>
+                    </div>
+                </div>
+
+                <div style="margin-top:12px">
+                    <div class="progress"><span class="bar" id="bar"></span></div>
+                    <div class="pct" id="pct">ความคืบหน้า 0% (จ–ส)</div>
+                </div>
+
+                <div class="quote" style="margin-top:12px">
+                    <p>
+                        เริ่มนับเมื่อ: <b id="startDate">14 ต.ค. 2568 11:14</b>
+                        • ทำงานมาแล้ว: <b id="workedDays">0</b> วัน (จ–ส)
+                    </p>
+                    <small>คนเก่งของเค้า สู้ ๆ นะครับ 🤍</small>
+                </div>
+
+                <div class="actions" style="margin-top:10px">
+                    <button class="btn" id="refreshBtn">รีเฟรชตอนนี้</button>
+                </div>
+            </section>
+
+            <!-- ขวา: Game + Encouragement -->
+            <section class="box">
+                <h3>มินิเกม: แต้มออนไลน์ • สวน & เพ็ทคาเฟ่</h3>
+
+                <div class="badges" style="margin-bottom:8px">
+                    <span class="badge">พอยต์: <b id="pts">0</b></span>
+                    <span class="badge">อีก <b id="nextPt">05:00</b> จะได้ +1 พอยต์</span>
+                    <span class="badge">ได้พอยต์ทุก 10 นาที</span>
+                    <button class="btn ghost" id="summaryBtn" style="margin-left:auto">📊 สรุปความก้าวหน้า</button>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" data-panel="garden">🌿 สวน</button>
+                    <button class="tab" data-panel="pets">🐾 เพ็ทคาเฟ่</button>
+                    <button class="tab" data-panel="quests">🎯 เควสรายวัน (5)</button>
+                </div>
+
+                <!-- GARDEN -->
+                <div class="panel show" id="panel-garden">
+                    <div class="row">
+                        <div class="big" id="gardenIcon">🌱</div>
+                        <div>
+                            <div class="badges" style="gap:10px;flex-wrap:wrap">
+                                <span class="badge">
+                                    พืช:
+                                    <select id="plantType"
+                                        style="border:1px solid var(--pink-200); border-radius:10px; padding:4px 8px; max-width:220px">
+                                        <option value="tree">ต้นไม้ 🌳</option>
+                                        <option value="cactus" disabled>กระบองเพชร 🌵 🔒</option>
+                                        <option value="flower" disabled>ดอกไม้ 🌸 🔒</option>
+                                        <option value="strawberry" disabled>สตรอว์เบอร์รี่ 🍓 🔒</option>
+                                        <option value="wheat" disabled>ต้นข้าว 🌾 🔒</option>
+                                    </select>
+                                </span>
+                                <span class="badge">เลเวล: <b id="plantLvl">1</b> / <b>10</b></span>
+                                <span class="badge">EXP: <b id="plantExp">0</b>/<span id="plantNeed">5</span></span>
+                                <span class="badge">ปลดล็อกถัดไปเมื่อชนิดปัจจุบัน MAX</span>
+                            </div>
+                            <div class="store">
+                                <button class="btn ghost" id="waterBtn">รดน้ำ (+1 EXP) <span class="price">3
+                                        พอยต์</span></button>
+                                <button class="btn ghost" id="fertBtn">ใส่ปุ๋ย (+3 EXP) <span class="price">6
+                                        พอยต์</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PETS -->
+                <div class="panel" id="panel-pets">
+                    <div class="row">
+                        <div class="big" id="petIcon">🐱</div>
+                        <div>
+                            <div class="badges" style="gap:10px;flex-wrap:wrap">
+                                <span class="badge">
+                                    สัตว์:
+                                    <select id="petType"
+                                        style="border:1px solid var(--pink-200); border-radius:10px; padding:4px 8px; max-width:220px">
+                                        <option value="cat">แมวน้อย 🐱</option>
+                                        <option value="dog" disabled>หมาน้อย 🐶 🔒</option>
+                                        <option value="rabbit" disabled>กระต่าย 🐰 🔒</option>
+                                        <option value="hamster" disabled>แฮมสเตอร์ 🐹 🔒</option>
+                                        <option value="bird" disabled>นกน้อย 🐦 🔒</option>
+                                    </select>
+                                </span>
+                                <span class="badge">เลเวล: <b id="petLvl">1</b> / <b>10</b></span>
+                                <span class="badge">EXP: <b id="petExp">0</b>/<span id="petNeed">5</span></span>
+                                <span class="badge">ปลดล็อกถัดไปเมื่อชนิดปัจจุบัน MAX</span>
+                            </div>
+                            <div class="store">
+                                <button class="btn ghost" id="feedBtn">ให้อาหาร (+1 EXP) <span class="price">2
+                                        พอยต์</span></button>
+                                <button class="btn ghost" id="playBtn">เล่นด้วย (+2 EXP) <span class="price">4
+                                        พอยต์</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUESTS -->
+                <div class="panel" id="panel-quests">
+                    <div id="questHeader" class="badges" style="margin-bottom:6px; gap:8px">
+                        <span class="badge">เควสวันนี้: <b id="questCount">0</b> งาน</span>
+                        <span class="badge">รีเซ็ตอัตโนมัติทุกวัน (เวลาไทย)</span>
+                    </div>
+                    <div id="questList"></div>
+                </div>
+
+                <!-- ENCOURAGEMENT -->
+                <div class="box" style="margin-top:12px; border-radius:16px">
+                    <h3>ให้กำลังใจแฟน 💗</h3>
+                    <div class="actions" style="margin-bottom:8px">
+                        <button class="btn" id="giftBtn">ขอกำลังใจเดี๋ยวนี้ 💖</button>
+                        <button class="btn link" id="igBtn">อยากคุยกับเธอ (IG) 📲</button>
+                    </div>
+                    <div class="chips">
+                        <button class="chip" data-cat="tired">เหนื่อยมากเลย 😞</button>
+                        <button class="chip" data-cat="stress">เครียดจัง 😣</button>
+                        <button class="chip" data-cat="sad">ท้อแท้ 😢</button>
+                        <button class="chip" data-cat="miss">คิดถึงเธอ 💕</button>
+                        <button class="chip" data-cat="motivate">ขอแรงบันดาลใจ ✨</button>
+                        <button class="chip" data-cat="wish">ขอคำอวยพร 💌</button>
+                        <button class="chip" data-cat="affirm">ยืนยันพลังบวก 🌈</button>
+                        <button class="chip" data-cat="break">ขอทริคพักใจ ☕</button>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <div class="footer">
+            ทำด้วยรักในโทนชมพูพาสเทล 💞 — Responsive สำหรับ iPhone/iPad/มือถือ • ใช้ LocalStorage จำสถานะ
+        </div>
+    </div>
+
+    <!-- Modal Summary -->
+    <div class="modal" id="summaryModal" aria-hidden="true">
+        <div class="inner" role="dialog" aria-modal="true" aria-labelledby="summaryTitle">
+            <button class="close" id="summaryClose">✕</button>
+            <h3 id="summaryTitle">📊 สรุปความก้าวหน้า</h3>
+            <h4 style="margin:6px 0 6px">🌿 พืช</h4>
+            <div id="plantSummary"></div>
+            <h4 style="margin:10px 0 6px">🐾 สัตว์เลี้ยง</h4>
+            <div id="petSummary"></div>
+            <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap">
+                <span class="tag">MAX ต่อชนิด = 10</span>
+                <span class="tag">ปลดล็อกเรียงลำดับ: ต้อง MAX ก่อนหน้า</span>
+                <span class="tag">เปลี่ยนรูปร่างทุก 2 เลเวล (รวม 5 ช่วง)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast + Hearts -->
+    <div class="toast" id="toast" aria-live="polite">
+        <div class="inner" id="toastText">เย้! ได้พอยต์แล้ว 💗</div>
+    </div>
+    <div class="hearts" id="hearts"></div>
+
+    <script>
+        const $ = (s) => document.querySelector(s);
+        const pad = (n) => String(n).padStart(2, '0');
+        const clone = (o) => (window.structuredClone ? structuredClone(o) : JSON.parse(JSON.stringify(o)));
+
+        const TZ_OFFSET_MIN = 7 * 60;
+        function nowInBangkok() { const n = new Date(); return new Date(n.getTime() + (TZ_OFFSET_MIN - n.getTimezoneOffset()) * 60000); }
+        function bkkUTC(y, m, d, hh = 0, mm = 0, ss = 0) { return new Date(Date.UTC(y, m, d, hh - 7, mm, ss)); }
+
+        const TARGET_BKK = bkkUTC(2026, 1, 13, 17, 0, 0);
+        const START_FIXED = bkkUTC(2025, 9, 14, 0, 0, 0);
+        $('#startDate').textContent = START_FIXED.toLocaleString('th-TH', { timeZone: 'Asia/Bangkok', dateStyle: 'medium', timeStyle: 'short' });
+
+        const MAX_LEVEL = 10;
+        const GAME = {
+            INTERVAL_SEC: 600, POINT_PER_INTERVAL: 1,
+            COST_WATER: 3, COST_FERT: 6, COST_FEED: 2, COST_PLAY: 4,
+            EXP_WATER: 1, EXP_FERT: 3, EXP_FEED: 1, EXP_PLAY: 2,
+            EXP_PER_LEVEL: 5
+        };
+
+        const LS = { POINTS: 'plc_points', ACC: 'plc_accsec', PLANTS: 'plc_plants', PETS: 'plc_pets', UNLOCKS: 'plc_unlocks', QUESTS: 'plc_daily_quests', WELCOME: 'plc_welcome_bonus' };
+
+        function getPoints() { return parseInt(localStorage.getItem(LS.POINTS) || '0', 10); }
+        function setPoints(v) { localStorage.setItem(LS.POINTS, String(v)); $('#pts').textContent = v; }
+        function addPoints(n) { setPoints(getPoints() + n); toast(`ได้พอยต์ +${n} 🎁`); hearts(); }
+
+        const plantOrder = ['tree', 'cactus', 'flower', 'strawberry', 'wheat'];
+        const petOrder = ['cat', 'dog', 'rabbit', 'hamster', 'bird'];
+
+        const defaultPlants = Object.fromEntries(plantOrder.map(k => [k, { lvl: 1, exp: 0 }]));
+        const defaultPets = Object.fromEntries(petOrder.map(k => [k, { lvl: 1, exp: 0 }]));
+        const defaultUnlock = { plants: Object.fromEntries(plantOrder.map((k, i) => [k, i === 0])), pets: Object.fromEntries(petOrder.map((k, i) => [k, i === 0])) };
+
+        function loadJSON(k, fb) { try { return JSON.parse(localStorage.getItem(k) || '') || fb; } catch { return fb; } }
+        function saveJSON(k, o) { localStorage.setItem(k, JSON.stringify(o)); }
+        function getPlants() { return loadJSON(LS.PLANTS, clone(defaultPlants)); }
+        function setPlants(o) { saveJSON(LS.PLANTS, o); }
+        function getPets() { return loadJSON(LS.PETS, clone(defaultPets)); }
+        function setPets(o) { saveJSON(LS.PETS, o); }
+        function getUnlocks() { return loadJSON(LS.UNLOCKS, clone(defaultUnlock)); }
+        function setUnlocks(o) { saveJSON(LS.UNLOCKS, o); }
+
+        function stageIndexByLevel(l) { return Math.min(4, Math.floor((l - 1) / 2)); }
+        const plantStages = { tree: ['🌱', '🌿', '🌳', '🌳🌼', '🌳🌸'], cactus: ['🌱', '🌵🌿', '🌵🌼', '🌵🌸', '🌵🌟'], flower: ['🌱', '🌼', '🌸', '🌺', '🌺✨'], strawberry: ['🌱', '🍃', '🍓', '🍓🌸', '🍓✨'], wheat: ['🌱', '🌿', '🌾', '🌾🌼', '🌾✨'] };
+        const petStages = { cat: ['🐾', '🐱', '😺', '😻', '🐱✨'], dog: ['🐾', '🐶', '🐕', '🐶💖', '🐶✨'], rabbit: ['🐾', '🐰', '🐇', '🐰💖', '🐰✨'], hamster: ['🐾', '🐹', '🐹✨', '🐹💖', '🐹🌟'], bird: ['🐾', '🐦', '🐥', '🕊️', '🐦✨'] };
+        const plantNames = { tree: 'ต้นไม้ 🌳', cactus: 'กระบองเพชร 🌵', flower: 'ดอกไม้ 🌸', strawberry: 'สตรอว์เบอร์รี่ 🍓', wheat: 'ต้นข้าว 🌾' };
+        const petNames = { cat: 'แมวน้อย 🐱', dog: 'หมาน้อย 🐶', rabbit: 'กระต่าย 🐰', hamster: 'แฮมสเตอร์ 🐹', bird: 'นกน้อย 🐦' };
+
+        function ensureChainUnlock(kind) {
+            const unlock = getUnlocks(), order = (kind === 'plant') ? plantOrder : petOrder, states = (kind === 'plant') ? getPlants() : getPets();
+            for (let i = 0; i < order.length - 1; i++) {
+                const cur = order[i], next = order[i + 1], bag = (kind === 'plant') ? 'plants' : 'pets';
+                if (states[cur].lvl >= MAX_LEVEL && !unlock[bag][next]) {
+                    unlock[bag][next] = true; setUnlocks(unlock);
+                    const label = (kind === 'plant') ? plantNames[next] : petNames[next];
+                    toast(`ปลดล็อก ${label} แล้ว! ✨`); hearts();
+                }
+            }
+        }
+
+        function refreshPlantUI() {
+            const plants = getPlants(), unlock = getUnlocks();
+            Array.from($('#plantType').options).forEach(op => {
+                const k = op.value; op.disabled = !unlock.plants[k]; op.textContent = plantNames[k] + (unlock.plants[k] ? '' : ' 🔒');
+            });
+            if (!unlock.plants[$('#plantType').value]) { $('#plantType').value = plantOrder.find(k => unlock.plants[k]); }
+            const t = $('#plantType').value;
+            if (!plants[t]) { plants[t] = { lvl: 1, exp: 0 }; setPlants(plants); }
+            const st = plants[t];
+            $('#plantLvl').textContent = st.lvl;
+            $('#plantExp').textContent = st.exp % GAME.EXP_PER_LEVEL;
+            $('#plantNeed').textContent = GAME.EXP_PER_LEVEL;
+            $('#gardenIcon').textContent = plantStages[t][stageIndexByLevel(st.lvl)];
+        }
+        function refreshPetUI() {
+            const pets = getPets(), unlock = getUnlocks();
+            Array.from($('#petType').options).forEach(op => {
+                const k = op.value; op.disabled = !unlock.pets[k]; op.textContent = petNames[k] + (unlock.pets[k] ? '' : ' 🔒');
+            });
+            if (!unlock.pets[$('#petType').value]) { $('#petType').value = petOrder.find(k => unlock.pets[k]); }
+            const t = $('#petType').value;
+            if (!pets[t]) { pets[t] = { lvl: 1, exp: 0 }; setPets(pets); }
+            const st = pets[t];
+            $('#petLvl').textContent = st.lvl;
+            $('#petExp').textContent = st.exp % GAME.EXP_PER_LEVEL;
+            $('#petNeed').textContent = GAME.EXP_PER_LEVEL;
+            $('#petIcon').textContent = petStages[t][stageIndexByLevel(st.lvl)];
+        }
+
+        function addExpTo(kind, type, n) {
+            const dict = (kind === 'plant') ? getPlants() : getPets();
+            if (!dict[type]) dict[type] = { lvl: 1, exp: 0 };
+            const st = dict[type];
+            if (st.lvl >= MAX_LEVEL) { toast('ถึงระดับสูงสุดแล้ว 🎉'); hearts('✨'); return; }
+            st.exp += n;
+            let leveled = false;
+            while (st.exp >= GAME.EXP_PER_LEVEL && st.lvl < MAX_LEVEL) {
+                st.exp -= GAME.EXP_PER_LEVEL; st.lvl++; leveled = true;
+            }
+            (kind === 'plant') ? setPlants(dict) : setPets(dict);
+            ensureChainUnlock(kind);
+            (kind === 'plant') ? refreshPlantUI() : refreshPetUI();
+            if (leveled) { toast(`เลเวลอัป! Lv.${st.lvl} ✨`); hearts('✨'); }
+        }
+
+        function spend(cost, ok) {
+            const p = getPoints();
+            if (p < cost) { toast(`พอยต์ยังไม่พอ (${p}/${cost}) งืออ 🥺`); return; }
+            setPoints(p - cost); ok && ok();
+        }
+
+        function countMonToSatDays(from, to) {
+            if (to <= from) return 0;
+            const ONE = 86400000;
+            const s = new Date(Date.UTC(from.getUTCFullYear(), from.getUTCMonth(), from.getUTCDate()));
+            const e = new Date(Date.UTC(to.getUTCFullYear(), to.getUTCMonth(), to.getUTCDate()));
+            const diffDays = Math.ceil((e - s) / ONE);
+            const fullWeeks = Math.floor(diffDays / 7);
+            let workDays = fullWeeks * 6, rem = diffDays % 7, d = s.getUTCDay();
+            for (let i = 0; i < rem; i++) { d = (d + 1) % 7; if (d !== 0) workDays++; }
+            return workDays;
+        }
+        function tick() {
+            const n = nowInBangkok();
+            let diff = TARGET_BKK - n; if (diff < 0) diff = 0;
+            const sec = Math.floor(diff / 1000);
+            $('#d').textContent = Math.floor(sec / 86400);
+            $('#h').textContent = pad(Math.floor((sec % 86400) / 3600));
+            $('#m').textContent = pad(Math.floor((sec % 3600) / 60));
+            $('#s').textContent = pad(sec % 60);
+            const total = countMonToSatDays(START_FIXED, TARGET_BKK);
+            const done = countMonToSatDays(START_FIXED, n);
+            const pct = total ? Math.min(100, Math.round((done / total) * 100)) : 0;
+            $('#bar').style.width = pct + '%'; $('#pct').textContent = `ความคืบหน้า ${pct}% (จ–ส)`;
+            $('#workedDays').textContent = done;
+        }
+
+        function updateNextTimer(acc) {
+            const remain = GAME.INTERVAL_SEC - (acc % GAME.INTERVAL_SEC);
+            const mm = Math.floor(remain / 60), ss = remain % 60;
+            $('#nextPt').textContent = `${pad(mm)}:${pad(ss)}`;
+        }
+        (function earningInit() {
+            if (localStorage.getItem(LS.POINTS) === null) setPoints(0);
+            if (!localStorage.getItem(LS.WELCOME)) {
+                addPoints(3);
+                localStorage.setItem(LS.WELCOME, '1');
+                toast('แพ็กต้อนรับ +3 พอยต์ 💖 ลองอัปเลเวลได้เลย!');
+            }
+            let pts = getPoints();
+            let acc = parseInt(localStorage.getItem(LS.ACC) || '0', 10);
+            $('#pts').textContent = pts; updateNextTimer(acc);
+
+            let active = document.visibilityState === 'visible';
+            document.addEventListener('visibilitychange', () => { active = document.visibilityState === 'visible'; if (active) tick(); });
+
+            setInterval(() => {
+                if (!active) return;
+                acc += 1;
+                if (acc >= GAME.INTERVAL_SEC) {
+                    const gained = Math.floor(acc / GAME.INTERVAL_SEC) * GAME.POINT_PER_INTERVAL;
+                    acc = acc % GAME.INTERVAL_SEC;
+                    pts += gained; setPoints(pts);
+                    toast(`ได้พอยต์ +${gained} สำหรับการออนไลน์ 💗`); hearts();
+                }
+                localStorage.setItem(LS.ACC, String(acc)); updateNextTimer(acc);
+            }, 1000);
+        })();
+
+        const QUEST_POOL = [
+            'รดน้ำต้นไม้หรือดูแลพืชเล็กๆ 🌿',
+            'ยืดเส้นเบาๆ 2 นาที 🧘‍♀️',
+            'ดื่มน้ำให้ครบ 1 แก้ว 💧',
+            'ชมตัวเองในกระจกว่า “วันนี้เก่งมากเลยนะเรา” 💖',
+            'ส่งข้อความดีๆ ให้เพื่อน 1 คน 💌',
+            'เปิดเพลงฟัง 1 เพลงที่ชอบ 🎵',
+            'จัดโต๊ะเรียน/ห้องให้เป็นระเบียบ ✨',
+            'กินของอร่อย 1 อย่าง 🍰',
+            'พักสายตา 5 นาที ไม่แตะโทรศัพท์ 👀',
+            'เขียนสิ่งดีๆ ของวันนี้ลงสมุด 1 ข้อ 📖'
+        ];
+        function todayKey() { const d = nowInBangkok(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; }
+        function loadQuests() {
+            const data = loadJSON(LS.QUESTS, null);
+            const today = todayKey();
+            if (!data || data.date !== today) {
+                const shuffled = QUEST_POOL.slice().sort(() => Math.random() - 0.5).slice(0, 5);
+                const items = shuffled.map((text, i) => ({ id: `q${i}`, text, reward: (Math.random() < 0.5 ? 1 : 2), done: false }));
+                const fresh = { date: today, items }; saveJSON(LS.QUESTS, fresh); return fresh;
+            }
+            return data;
+        }
+        function saveQuests(q) { saveJSON(LS.QUESTS, q); }
+        function renderQuests() {
+            const q = loadQuests();
+            $('#questCount').textContent = q.items.length;
+            const list = $('#questList'); list.innerHTML = '';
+            q.items.forEach(it => {
+                const div = document.createElement('div'); div.className = 'quest';
+                div.innerHTML = `
+          <div>
+            <div style="font-weight:600">${it.text} ${it.done ? '✅' : ''}</div>
+            <small>รางวัล: +${it.reward} พอยต์</small>
+          </div>
+          <button class="btn ${it.done ? 'ghost' : ''}" ${it.done ? 'disabled' : ''} data-id="${it.id}">
+            ${it.done ? 'รับแล้ว' : 'รับพอยต์'}
+          </button>`;
+                list.appendChild(div);
+            });
+            list.querySelectorAll('button[data-id]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.getAttribute('data-id');
+                    const q = loadQuests();
+                    const it = q.items.find(x => x.id === id);
+                    if (!it || it.done) return;
+                    it.done = true; saveQuests(q);
+                    addPoints(it.reward);
+                    renderQuests();
+                });
+            });
+        }
+
+        function pct(n) { return Math.max(0, Math.min(100, n)); }
+        function summaryRows(obj, unlock, names, icons) {
+            const frag = document.createDocumentFragment();
+            Object.keys(obj).forEach(k => {
+                const st = obj[k];
+                const row = document.createElement('div'); row.className = 'summary-row';
+                const ico = icons[k][stageIndexByLevel(st.lvl)];
+                const lv = st.lvl; const p = Math.round((lv / MAX_LEVEL) * 100);
+                row.innerHTML = `
+          <div style="font-size:28px; text-align:center">${ico}</div>
+          <div>
+            <div class="summary-name">${names[k]} ${unlock[k] ? '' : '<span class="tag" style="margin-left:6px">🔒 ยังไม่ปลดล็อก</span>'}</div>
+            <div class="bar-sm" aria-label="progress"><span style="width:${pct(p)}%"></span></div>
+            <small>Lv. ${lv} / ${MAX_LEVEL} • EXP ${st.exp % GAME.EXP_PER_LEVEL}/${GAME.EXP_PER_LEVEL}</small>
+          </div>
+          <div><span class="tag">${unlock[k] ? 'พร้อมเล่น' : 'รอปลดล็อก'}</span></div>`;
+                frag.appendChild(row);
+            });
+            return frag;
+        }
+        function renderSummary() {
+            const plants = getPlants(), pets = getPets(), unlock = getUnlocks();
+            const pWrap = $('#plantSummary'); pWrap.innerHTML = ''; pWrap.appendChild(summaryRows(plants, unlock.plants, plantNames, plantStages));
+            const aWrap = $('#petSummary'); aWrap.innerHTML = ''; aWrap.appendChild(summaryRows(pets, unlock.pets, petNames, petStages));
+        }
+
+        function toast(text) {
+            const el = $('#toast'); $('#toastText').textContent = text;
+            el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
+            clearTimeout(toast._t); toast._t = setTimeout(() => el.classList.remove('show'), 2400);
+        }
+        function hearts(symbol) {
+            const n = 16 + Math.floor(Math.random() * 8);
+            const w = window.innerWidth, h = window.innerHeight;
+            for (let i = 0; i < n; i++) {
+                const s = document.createElement('span');
+                s.className = 'heart'; s.textContent = symbol || (Math.random() < .6 ? '💗' : (Math.random() < .5 ? '💖' : '💞'));
+                s.style.left = Math.random() * w + 'px'; s.style.top = (h - 10) + 'px';
+                s.style.animationDelay = (Math.random() * 0.8) + 's'; s.style.filter = 'blur(' + (Math.random() * 0.6) + 'px)';
+                $('#hearts').appendChild(s); setTimeout(() => s.remove(), 3200);
+            }
+        }
+
+        // ==== Encouragement (ข้อความกำลังใจ) ====
+        const MESSAGE_SETS = {
+            tired: [
+                "พักก่อนนะที่รัก 💗 เธอเหนื่อยมามากแล้ว เราอยู่ตรงนี้เสมอ",
+                "วางสิ่งที่แบกไว้ลงก่อนก็ได้ เราอยากเห็นเธอสบายใจ 🌸",
+                "แค่เธอยังยิ้มได้ เราก็ดีใจที่สุดแล้ว ☀️",
+                "ขอบคุณที่ยังไม่ยอมแพ้นะ เธอเก่งมากจริง ๆ 💕",
+                "ไม่ต้องแข็งแกร่งตลอดเวลาก็ได้ พักบ้างก็ได้นะ 🌷",
+                "นอนหลับให้เต็มตื่นนะ พรุ่งนี้ค่อยว่ากันใหม่ 🌙",
+                "เธอไม่จำเป็นต้องทำได้ทุกอย่างในวันเดียว 💗",
+                "บางวันแค่ “อยู่รอด” ก็ถือว่าเก่งมากแล้วนะ 🌻",
+                "เหนื่อยได้ แต่อย่าหายไปนานเลย เราคิดถึงนะ 🤍",
+                "พักสักนิด แล้วค่อยกลับมาสู้ใหม่ก็ยังทัน 💪",
+                "ถ้าวันนี้มันหนักไป แค่ก้าวช้า ๆ ก็ยังดี 🌿",
+                "อย่าลืมหายใจลึก ๆ ให้ตัวเองได้ผ่อนคลายหน่อยนะ 🍃",
+                "ไม่มีใครเก่งได้ทุกวันหรอก เธอไม่ได้ล้มเหลวเลย 🌈",
+                "โลกยังคงหมุนต่อไป แม้เธอจะหยุดพักบ้างก็ไม่เป็นไร 🌤️",
+                "แค่เธอยังอยู่ตรงนี้ ก็คือเรื่องดีมากแล้ว 💞",
+                "อย่ากลัวที่จะหยุดพัก การหยุดไม่ใช่การแพ้ ❤️",
+                "เธอไม่ต้องเป็นที่หนึ่งเสมอไป แค่ไม่ลืมดูแลตัวเองก็พอ 💐",
+                "ลองหลับตาแล้วคิดถึงสิ่งที่ทำให้ยิ้มได้สิ ☀️",
+                "เธอเหนื่อยได้ แต่ห้ามหมดหวังนะ 🌷",
+                "บางครั้งการนอนพักก็เป็นการเยียวยาที่ดีที่สุด 💤",
+                "อย่ากังวลมากไปเลย ทุกอย่างจะเข้าที่ของมันเอง 🍀",
+                "ไม่มีใครคาดหวังให้เธอสมบูรณ์แบบหรอก 🌼",
+                "ร่างกายต้องการพัก เหมือนหัวใจที่อยากได้อ้อมกอด 💕",
+                "หยุดพักก่อนเถอะ แล้วค่อยไปต่อก็ยังไม่สาย 🌸",
+                "เธอทำดีที่สุดแล้วจริง ๆ ขอบคุณนะ 🌙",
+                "พรุ่งนี้ยังมีแสงใหม่ให้เธอเสมอ ☀️",
+                "แค่เธออย่าลืมยิ้มให้ตัวเองบ้างก็พอ 😊",
+                "เธอไม่ต้องรีบโตขนาดนั้นก็ได้ โลกยังรอเธออยู่ 🌿",
+                "อย่าฝืนเลยนะ เธอก็มีสิทธิ์เหนื่อยเหมือนกัน 💗",
+                "ขอให้คืนนี้เป็นคืนที่ใจเธอได้พักจริง ๆ 🌙",
+                "ทุกหยดเหงื่อของเธอมีความหมายเสมอ 🫶",
+                "ถึงจะช้าแต่ก็ยังดีกว่าไม่เริ่มเดินเลยนะ 🍃",
+                "บางวันเราก็ต้องยอมให้ตัวเองอ่อนแอบ้าง 💞",
+                "เธอไม่ต้องทำทุกอย่างวันนี้ก็ได้ พรุ่งนี้ยังมี 🌤️",
+                "การพักไม่ได้แปลว่าหยุดสู้ มันคือการเติมพลัง ❤️",
+                "หยุดคิดเรื่องหนัก ๆ แล้วฟังเพลงดี ๆ สักเพลงสิ 🎶",
+                "แค่เธอหายใจอยู่ก็ถือว่าเก่งมากแล้วนะ 🌷",
+                "ลองวางโทรศัพท์แล้วนอนดูดาวบ้าง 🌙",
+                "โลกจะไม่พัง ถ้าเธอพักสักวัน 💫",
+                "พักหน่อยนะ เก่งขนาดนี้สมควรได้พักแล้ว 💗",
+                "อย่าลืมกินข้าว ดื่มน้ำ แล้วดูแลตัวเองด้วยนะ 🍚",
+                "เธอมีสิทธิ์เหนื่อย มีสิทธิ์ร้องไห้ และมีสิทธิ์พัก 🌼",
+                "อย่าลืมว่าการดูแลตัวเองคือสิ่งสำคัญที่สุด 🤍",
+                "หยุดพักก่อนที่ร่างกายจะบังคับให้เธอหยุด 🌿",
+                "พรุ่งนี้ตื่นมาจะรู้ว่า มันไม่ได้แย่เท่าที่คิด 🌅",
+                "เธอคือคนเก่ง แม้วันที่รู้สึกอ่อนแอ 💪",
+                "พักสักนิด แล้วกลับมายิ้มให้โลกอีกครั้ง 🌸",
+                "ความเหนื่อยวันนี้ จะกลายเป็นความภูมิใจในวันหน้า 🌈",
+                "อย่าลืมว่าเธอก็เป็นคนสำคัญของใครหลายคน ❤️",
+                "ขอบคุณที่ยังอยู่ตรงนี้นะ โลกใบนี้อบอุ่นขึ้นเพราะเธอ ☀️"
+            ],
+
+            stress: [
+                "อย่าโทษตัวเองเลยนะ 💕 เธอทำดีที่สุดแล้วจริง ๆ",
+                "หายใจเข้าลึก ๆ แล้วค่อย ๆ ปล่อยออก 🌿 เธอเก่งมากที่ยังยืนอยู่ตรงนี้",
+                "ทุกปัญหามีเวลาของมัน แล้วมันจะค่อย ๆ ดีขึ้นแน่นอน 🫶",
+                "เธอไม่ได้ล้มเหลวหรอก แค่กำลังเรียนรู้ที่จะเติบโต 🌱",
+                "ปัญหาทุกอย่างไม่ได้อยู่กับเราไปตลอด มันจะผ่านไปแน่ 🌤️",
+                "เธอไม่ต้องแข็งแกร่งทุกวันหรอก แค่ไม่ยอมแพ้ก็พอ 💪",
+                "อย่ากังวลกับสิ่งที่ยังมาไม่ถึงเลยนะ 🌻",
+                "บางครั้งการร้องไห้ก็ช่วยปลดปล่อยหัวใจได้ดีที่สุด 💧",
+                "พักจากความคิดเยอะ ๆ บ้างก็ได้นะ ☕",
+                "ทุกอย่างจะเข้าที่ของมันเองเมื่อถึงเวลา 🍀",
+                "เธอเก่งมากแล้วที่ยังพยายาม แม้จะเหนื่อยขนาดไหน 💗",
+                "ปัญหานี้ไม่ใช่จุดจบของเธอ มันคือจุดเริ่มต้นใหม่ 🌈",
+                "ไม่มีใครคาดหวังให้เธอสมบูรณ์แบบ ทุกคนก็แค่คนธรรมดา 🌸",
+                "อย่าลืมว่าความสุขเล็ก ๆ ก็มีอยู่รอบตัว 🌷",
+                "บางเรื่องไม่ต้องเข้าใจตอนนี้ก็ได้ แค่ผ่านมันไปก่อน 💕",
+                "ทุกครั้งที่เธอผ่านวันยาก ๆ ได้ เธอก็แข็งแกร่งขึ้นอีกหน่อย 💪",
+                "เธอไม่จำเป็นต้องแก้ทุกอย่างในวันนี้ 🌿",
+                "หายใจลึก ๆ แล้วปล่อยทุกอย่างไว้ข้างหลังชั่วคราวก็ได้ 🌙",
+                "เธอไม่ได้อ่อนแอ แค่เหนื่อยจากการพยายามมานานเกินไป ❤️",
+                "ปัญหานี้จะกลายเป็นเรื่องเล็กเมื่อเธอมองย้อนกลับมา 🌻",
+                "เธอยังมีโอกาสอีกมาก อย่ารีบหมดหวังเลยนะ 🌅",
+                "ไม่มีคืนไหนที่เช้าไม่มา อย่ากลัวเลยนะ 🌙",
+                "ทุกคนมีวันที่ไม่โอเค เธอก็เช่นกัน และนั่นไม่เป็นไรเลย 💗",
+                "เธอไม่ต้องฝืนยิ้มทุกวันก็ได้ แค่ไม่ลืมยิ้มอีกครั้งก็พอ 🌸",
+                "เธอผ่านเรื่องหนัก ๆ มาหลายครั้งแล้ว เรื่องนี้ก็เช่นกัน 🌿",
+                "ปัญหาทุกอย่างมีวันจบ แต่ความเข้มแข็งของเธอจะอยู่ตลอดไป 🕊️",
+                "อย่าลืมว่าการพักไม่ใช่ความล้มเหลว 💕",
+                "เธอมีสิทธิ์ที่จะรู้สึกเหนื่อย มีสิทธิ์จะหยุดพัก ❤️",
+                "ไม่มีใครเข้าใจตัวเธอได้เท่าตัวเธอเองแล้ว 🌷",
+                "เธอทำได้แน่นอน แค่เชื่อในหัวใจของตัวเองอีกหน่อย 💫",
+                "ความเครียดจะเบาลง ถ้าเธอแบ่งมันออกมาเล็กน้อย 🪶",
+                "ลองมองฟ้าแล้วบอกตัวเองว่า “เราจะผ่านไปได้” ☁️",
+                "เธอมีคุณค่ามากกว่าเรื่องแย่ ๆ ที่เจอเสมอ 💕",
+                "ทุกอย่างในชีวิตกำลังพาเธอไปยังจุดที่ดีกว่า 🌈",
+                "อย่าเกลียดตัวเองในวันที่รู้สึกอ่อนแอเลยนะ 💗",
+                "ลองยิ้มให้ตัวเองในกระจกสิ เธอจะเห็นคนที่ไม่ยอมแพ้ 🫶",
+                "ไม่มีใครเข้มแข็งได้ตลอดเวลา เธอก็มีสิทธิ์พังได้เหมือนกัน 🌧️",
+                "เธอไม่จำเป็นต้องเข้าใจทุกอย่าง แค่ใช้หัวใจรู้สึกก็พอ 🌸",
+                "ปัญหานี้อาจดูใหญ่ตอนนี้ แต่วันหนึ่งเธอจะหัวเราะกับมันได้แน่ 🌿",
+                "ความเครียดไม่ใช่ศัตรู มันคือสัญญาณให้เราได้พัก ❤️",
+                "เธอไม่ได้อยู่คนเดียว เราอยู่ตรงนี้เสมอ 🤍",
+                "ทุกปัญหาเป็นครูที่ทำให้เธอเติบโตขึ้นทุกวัน 🌱",
+                "อย่าลืมว่าทุกการผ่านไปคือการเรียนรู้ 💫",
+                "เธอไม่ต้องรีบหาคำตอบ บางคำตอบจะมาหาเองเมื่อถึงเวลา 🕊️",
+                "โลกนี้ไม่ต้องการเธอที่สมบูรณ์แบบ แค่ต้องการเธอที่มีความสุข 🌍",
+                "ทุกครั้งที่เธอเลือกจะยิ้ม นั่นคือการชนะความเครียดแล้ว 🌷",
+                "ลองหาของอร่อยกินดูสิ ความสุขเล็ก ๆ มันอยู่ตรงนั้น 🍰",
+                "อย่าลืมกอดตัวเองแน่น ๆ แล้วบอกว่า “เราเก่งมากแล้วนะ” 💕",
+                "ปัญหาทุกอย่างมีทางออก แม้มันจะยังไม่ชัดในตอนนี้ 🌈",
+                "เธอผ่านมาหลายอย่างแล้ว เรื่องนี้ก็จะผ่านไปเหมือนกัน 🌿"
+            ],
+
+            sad: [
+                "ถ้าร้องไห้ก็ไม่เป็นไรนะ 😢 เราจะอยู่ข้าง ๆ จนกว่าเธอจะยิ้มได้อีกครั้ง",
+                "อยากให้รู้ว่าไม่ต้องเข้มแข็งตลอดเวลาก็ได้ 💗",
+                "ฝนจะหยุดตกเสมอ แล้วเราจะเห็นรุ้งด้วยกัน 🌈",
+                "เธอไม่ได้อยู่คนเดียวนะ เรายังอยู่ตรงนี้เสมอ 🤍",
+                "ไม่มีความเศร้าไหนอยู่กับเราไปตลอดหรอก 🌤️",
+                "ร้องไห้เถอะ ถ้ามันทำให้หัวใจเบาลง 💧",
+                "เธอยังมีค่า แม้วันที่รู้สึกแย่ที่สุด 💕",
+                "ไม่ต้องรีบยิ้มก็ได้ ค่อย ๆ ฟื้นหัวใจไปด้วยกันนะ 🌸",
+                "ความเศร้าไม่ได้ทำให้เธอน้อยค่าลงเลย 💫",
+                "บางครั้งการเสียใจก็แปลว่าเรารู้จักรักอย่างแท้จริง ❤️",
+                "เธอเก่งมากแล้ว ที่ยังอยู่ตรงนี้ แม้ใจจะสั่นไหว 🌷",
+                "ไม่มีใครหัวเราะได้ทุกวัน และไม่มีใครร้องไห้ตลอดไป ☁️",
+                "ทุกน้ำตาจะพาเธอไปสู่ความเข้าใจใหม่เสมอ 💗",
+                "อย่ากลัวที่จะรู้สึกเศร้า มันคือส่วนหนึ่งของการเป็นมนุษย์ 🫶",
+                "เธอยังมีแสงในตัวเอง แม้วันที่ท้องฟ้ามืดมน 🌙",
+                "อย่าลืมกอดตัวเองนะ เธอผ่านอะไรมาเยอะมากแล้ว 🌻",
+                "ความเสียใจไม่ใช่จุดจบ มันคือจุดเริ่มต้นของการเยียวยา 🌼",
+                "ทุกครั้งที่เธอล้มลง เธอจะลุกขึ้นได้แข็งแรงกว่าเดิม 💪",
+                "เธอไม่ได้พังหรอก แค่หัวใจกำลังพักฟื้น 💕",
+                "ความเศร้าไม่ได้ทำให้เธออ่อนแอ มันทำให้เธอเป็น “คนจริง” 🕊️",
+                "บางครั้งการคิดถึงคนที่จากไป ก็แปลว่าเรารักเขาจริง ๆ 💔",
+                "อย่าปิดหัวใจ แค่เพราะเคยเจ็บมาก่อนนะ 🌷",
+                "เธอยังมีอนาคตที่สวยงามรออยู่ข้างหน้า 🌅",
+                "ไม่มีใครลืมความเจ็บได้ทันที แต่วันหนึ่งมันจะไม่เจ็บเท่าเดิม 💫",
+                "ความเศร้าไม่ใช่สิ่งที่ต้องหนี มันคือสิ่งที่ต้องโอบไว้ก่อนจะปล่อยไป 🌿",
+                "เธอยังมีคนที่ห่วงใยอยู่รอบตัวเสมอ 💕",
+                "อย่ากลัวที่จะขอความช่วยเหลือ ใคร ๆ ก็ต้องการอ้อมแขนอบอุ่น 🌸",
+                "เธอยังคู่ควรกับความรักและความสุขนะ 🤍",
+                "ทุกครั้งที่หัวใจเจ็บ มันกำลังเติบโตขึ้นอีกนิด 🌱",
+                "เธอไม่ได้โดดเดี่ยว โลกยังมีคนเข้าใจเสมอ 🌍",
+                "ถึงวันนี้จะเศร้า แต่วันหน้าจะดีขึ้นแน่ ๆ 🌤️",
+                "ไม่มีใครต้องแข็งแกร่งตลอดเวลา เธอก็ไม่ต้อง 💗",
+                "ความรู้สึกแย่ ๆ จะไม่อยู่กับเธอตลอดไปแน่นอน 🌈",
+                "ถ้าร้องไห้จนเหนื่อยแล้ว ลองพักหัวใจไว้ในความเงียบบ้างนะ 🌙",
+                "เธอไม่จำเป็นต้องซ่อนความรู้สึกไว้คนเดียว 💕",
+                "แม้โลกจะหม่น เธอก็ยังเป็นแสงเล็ก ๆ ที่งดงามเสมอ ✨",
+                "อย่าปล่อยให้ความเศร้าทำให้ลืมว่าเธอมีค่า 🌸",
+                "เธอไม่ได้ผิดที่รู้สึกเสียใจ มันคือสิ่งที่มนุษย์ทุกคนมี 💧",
+                "ทุกการจากลา สอนให้เรารักให้ลึกขึ้นในครั้งต่อไป 💗",
+                "เธอไม่ต้องลืมอดีต แค่ไม่ต้องให้มันเจ็บเหมือนเดิม 🌿",
+                "เธอไม่ต้องเข้มแข็งเพื่อใคร แค่เข้มแข็งพอที่จะไม่เกลียดตัวเองก็พอ 🤍",
+                "วันหนึ่งเธอจะมองกลับมา แล้วขอบคุณตัวเองที่ไม่ยอมแพ้ 🌈",
+                "ไม่มีอะไรอยู่ตลอดไป แม้แต่ความเศร้าก็เช่นกัน 🌤️",
+                "เธอมีสิทธิ์ที่จะร้องไห้ และมีสิทธิ์จะเริ่มต้นใหม่ ❤️",
+                "ความเศร้าไม่ใช่ความพ่ายแพ้ มันคือบทเรียนของหัวใจ 💫",
+                "เธอไม่ได้อ่อนแอ เธอแค่ซื่อสัตย์กับความรู้สึกของตัวเอง 💕",
+                "เมื่อถึงเวลา เธอจะหัวเราะได้จากใจอีกครั้ง 🌻",
+                "เธอยังเป็นคนสวยงามในแบบของเธอ แม้ในวันที่ร้องไห้ 🌷",
+                "ทุกความเจ็บปวดจะสอนให้เธอรักตัวเองมากขึ้น 🕊️",
+                "อย่าลืมว่า เธอไม่ต้องผ่านมันคนเดียว เรายังอยู่ตรงนี้เสมอ 🤍"
+            ],
+
+            miss: [
+                "คิดถึงเธอที่สุดเลย 💕 อยากกอดแน่น ๆ ตอนนี้เลยได้มั้ย",
+                "ถึงอยู่ไกล แต่ใจเราอยู่ข้างกันเสมอนะ 🌙",
+                "อยากอยู่ตรงนั้น ปลอบเธอด้วยอ้อมกอดจริง ๆ 🫶",
+                "คิดถึงเสียงหัวเราะของเธอจัง มันทำให้วันของเราสดใสเสมอ ☀️",
+                "เธอรู้มั้ย ว่าเธออยู่ในความคิดถึงของเราทุกวัน 💗",
+                "แค่เห็นรูปเธอก็ยิ้มได้แล้ว 😊",
+                "อยากเดินเล่นด้วยกันอีกสักครั้งจัง 🌷",
+                "เธอคือความคิดถึงที่อบอุ่นที่สุดในใจเรา 💕",
+                "เวลาผ่านไปช้าเสมอ ตอนที่ไม่ได้อยู่กับเธอ ⏳",
+                "คืนนี้คิดถึงเธอเป็นพิเศษเลยละ 🌙",
+                "อยากฟังเสียงเธออีกจัง มันทำให้ใจเราสงบลงได้เสมอ 🎧",
+                "แม้จะไม่ได้อยู่ด้วยกัน แต่หัวใจเรายังใกล้เสมอ ❤️",
+                "คิดถึงรอยยิ้มของเธอที่สุดเลย 🌼",
+                "ทุกเพลงที่ฟังเหมือนมีชื่อเธออยู่ในนั้น 🎶",
+                "อยากให้เธอรู้ว่า เราคิดถึงจริง ๆ ไม่ใช่แค่พูดไป 🌸",
+                "แค่เธอโผล่มาในความคิด ใจก็อุ่นขึ้นทันที 💗",
+                "ถึงตอนนี้เธอจะอยู่ที่ไหน เราก็ยังคิดถึงเหมือนเดิม 🌍",
+                "ไม่มีวันไหนที่ไม่คิดถึงเธอเลยนะ ☁️",
+                "อยากนั่งคุยด้วยกันอีกจัง คิดถึงบรรยากาศนั้นมาก 💬",
+                "คิดถึงตอนที่หัวเราะพร้อมกันจนหยุดไม่ได้ 😂",
+                "ทุกครั้งที่มองท้องฟ้า เรามักจะคิดถึงเธอเสมอ 🌤️",
+                "คิดถึงจนเหมือนหัวใจมันเต้นแรงทุกที 💞",
+                "อยากให้เธอรู้ว่าเราไม่เคยลืมเลยแม้แต่วินาทีเดียว ⏰",
+                "เธอคือเหตุผลที่ทำให้คำว่า “คิดถึง” มีความหมาย 🌹",
+                "แม้ไม่ได้เจอกัน แต่หัวใจยังผูกกันแน่น 💕",
+                "อยากส่งอ้อมกอดผ่านลมไปถึงเธอเลยตอนนี้ 🍃",
+                "คิดถึงกลิ่นหอมอ่อน ๆ ของเธอจัง ☁️",
+                "แค่คิดถึงเธอ โลกก็กลายเป็นสีพาสเทลทันที 🌈",
+                "เธอคือความคิดถึงที่ไม่มีวันจางไป 💫",
+                "คิดถึงเธอแบบไม่รู้จะอธิบายยังไงเลย 💭",
+                "แม้ระยะทางจะไกล แต่หัวใจเราไม่เคยห่าง ❤️",
+                "อยากนั่งเงียบ ๆ ด้วยกัน เหมือนวันที่ไม่ต้องพูดอะไรก็เข้าใจ 🕊️",
+                "ความคิดถึงนี้น่ารักจัง เพราะมันมีชื่อเธออยู่ด้วย 💌",
+                "ทุกคืนก่อนนอน ยังคิดถึงเธอเหมือนเดิม 🌙",
+                "คิดถึงมากจนอยากเห็นหน้าเธอแค่แป๊บเดียวก็ยังดี 📸",
+                "อยากบอกให้รู้ว่าคิดถึง โดยไม่ต้องพิมพ์คำใดเลย 🫶",
+                "ทุกวันยังแอบมองหาความทรงจำของเธออยู่เสมอ 📷",
+                "เธออยู่ในใจเราเสมอ แม้ไม่อยู่ตรงนี้ 💕",
+                "คิดถึงเหมือนตอนฝนตก แล้วอยากมีใครมากอด 🌧️",
+                "เธอคือความรู้สึกดี ๆ ที่เรายังคิดถึงทุกวัน 🌷",
+                "อยากส่งจดหมายบอกว่า “เราคิดถึงเธอมาก” ✉️",
+                "ถึงเธอจะไม่รู้ แต่เราคิดถึงทุกวันจริง ๆ 💗",
+                "คิดถึงเธอจนใจมันเต้นช้าลงทุกทีที่คิดถึง 🌸",
+                "ถ้าได้เจอกันอีกครั้ง เราจะยิ้มให้กว้างที่สุดเลย 😊",
+                "เธอคือความทรงจำที่ยังอบอุ่นในใจเสมอ ☀️",
+                "ทุกครั้งที่คิดถึง เหมือนได้กลับไปในช่วงเวลานั้นอีกครั้ง 🕰️",
+                "คิดถึงแบบที่ไม่ต้องการอะไร แค่อยากให้รู้ว่ายังอยู่ตรงนี้ 💕",
+                "เธอคือความสบายใจในวันที่โลกวุ่นวาย 💫",
+                "แม้จะอยู่คนละที่ แต่เรายังรู้สึกถึงกันได้เสมอ 🌙",
+                "คิดถึงเธอเสมอ ไม่ว่าระยะทางหรือเวลา จะห่างกันแค่ไหน 🤍"
+            ],
+
+            motivate: [
+                "ทุกวันเธอเก่งขึ้นอีกนิด เราภูมิใจในตัวเธอมากเลยนะ ✨",
+                "เชื่อสิ เธอทำได้แน่นอน! คนเก่งของเรา 💪",
+                "อย่าลืมว่าความพยายามของเธอมีความหมายเสมอ 🌸",
+                "ไม่มีอะไรเกินความสามารถของเธอเลยจริง ๆ 🌈",
+                "ทุกก้าวเล็ก ๆ ที่เธอเดิน มันคือความสำเร็จอีกขั้น 💕",
+                "ความเหนื่อยวันนี้ จะกลายเป็นความภูมิใจในวันหน้า 🏆",
+                "เธอทำได้ดีมากแล้ว อย่าลืมชื่นชมตัวเองบ้างนะ 🌷",
+                "ล้มได้ แต่ห้ามเลิกเดินนะ เดี๋ยวถึงฝันแน่ 💫",
+                "ความฝันของเธอสวยมาก อย่าปล่อยให้มันหายไป ☁️",
+                "เธอมีพลังมากกว่าที่คิดไว้เยอะเลย 💖",
+                "ไม่มีใครเริ่มต้นแล้วเก่งทันที ทุกคนต้องผ่านจุดเริ่มเหมือนกัน 🌱",
+                "ทุกความพยายามจะไม่สูญเปล่า เธอกำลังสร้างอนาคตให้ตัวเองอยู่ 🌟",
+                "อย่ากลัวที่จะเริ่มใหม่ ไม่มีคำว่าสายเกินไป 💕",
+                "เธอคือแรงบันดาลใจของใครหลายคนเลยนะ 🌻",
+                "ความกล้าที่เธอมีในวันนี้ จะพาเธอไปไกลมากกว่าที่คิด 🕊️",
+                "ไม่มีใครหยุดเธอได้ ถ้าเธอไม่ยอมแพ้ 💪",
+                "เธอเก่งมากแล้วที่ยังไม่เลิกพยายาม ❤️",
+                "บางวันอาจไม่สมบูรณ์แบบ แต่มันก็ยังเป็น “ก้าวหนึ่ง” ที่สำคัญ 🌿",
+                "ความสำเร็จไม่ได้อยู่ไกล แค่เธออย่าหยุดเดิน 🌅",
+                "ทุกสิ่งที่เธอทำในวันนี้ จะกลายเป็นของขวัญให้ตัวเองในวันหน้า 🎁",
+                "เธอไม่ต้องวิ่งเร็วที่สุด แค่ไม่หยุดก็พอ 🏃‍♀️",
+                "ทุกครั้งที่เธอล้ม คือโอกาสใหม่ที่จะลุกขึ้นเก่งกว่าเดิม 💗",
+                "ความพยายามของเธอสวยงามเสมอ 🌸",
+                "อย่าลืมยิ้มให้ตัวเองหน่อยนะ เธอกำลังทำได้ดีมากเลย 😊",
+                "เธอไม่จำเป็นต้องเก่งกว่าใคร แค่ดีกว่าเมื่อวานก็พอ 💕",
+                "ความกล้าเล็ก ๆ วันนี้ จะกลายเป็นความมั่นใจมหาศาลในวันหน้า 🌷",
+                "เธอมีสิทธิ์ในความฝันของตัวเอง อย่าปล่อยให้ใครมาดับมัน ☀️",
+                "ทุกปัญหามีทางแก้ เธอฉลาดพอจะหามันเจอแน่นอน 💫",
+                "อย่าลืมว่า “เริ่มช้า” ดีกว่า “ไม่เริ่มเลย” ❤️",
+                "เธอไม่ต้องเป็นคนสมบูรณ์แบบ แค่เป็นคนที่ไม่ยอมแพ้ก็พอ 🌈",
+                "เธอมีพลังที่จะเปลี่ยนแปลงชีวิตของตัวเองได้เสมอ 💪",
+                "ทุกครั้งที่เธอเชื่อในตัวเอง โลกก็เริ่มเปลี่ยนตามทันที 🌍",
+                "ความล้มเหลวไม่ใช่จุดจบ แต่มันคือทางลัดของการเรียนรู้ 🪶",
+                "เธอจะขอบคุณตัวเองในวันหนึ่ง ที่ไม่ยอมแพ้ในวันนี้ 💕",
+                "อย่าลืมว่าสิ่งดี ๆ ต้องใช้เวลา แต่คุ้มค่าที่จะรอ 🌻",
+                "เธอไม่ได้เดินคนเดียว เราเชื่อในเธอเสมอ 🤍",
+                "ไม่มีอะไรเล็กเกินไปถ้ามันคือความฝันของเธอ ✨",
+                "ทุกเช้าที่ตื่นมา คือโอกาสใหม่ที่จะเริ่มอีกครั้ง 🌞",
+                "เธอทำดีที่สุดเท่าที่จะทำได้แล้ว และนั่นก็มากพอ 💗",
+                "แม้วันนี้จะเหนื่อย แต่วันหนึ่งเธอจะยิ้มแล้วพูดว่า “คุ้มค่าจริง ๆ” 🌷",
+                "ความสำเร็จของเธอเริ่มจากความกล้าก้าวแรกเสมอ 🚶‍♀️",
+                "เธอไม่ต้องรีบ แค่ไม่หยุดเท่านั้นเอง ❤️",
+                "ทุกก้าวที่เธอเดิน มันคือการชนะความกลัวในใจตัวเอง 🌈",
+                "อย่าลืมฉลองให้ตัวเองในทุกความสำเร็จเล็ก ๆ 🥳",
+                "เธอมีสิทธิ์ภาคภูมิใจกับตัวเองนะ 💫",
+                "ความฝันไม่ได้ไกลอย่างที่คิด ถ้าเธอเชื่อในหัวใจของตัวเอง 💕",
+                "ไม่มีใครมาหยุดเธอได้ ยกเว้นเธอจะหยุดเอง 💪",
+                "เธอมีทุกอย่างที่จำเป็นสำหรับความสำเร็จอยู่แล้ว 🌻",
+                "วันนี้เธออาจยังไม่ถึงจุดหมาย แต่เธอกำลังอยู่บนทางที่ถูกต้อง 🌿",
+                "เธอคือคนเก่งที่สุดในเวอร์ชันของตัวเอง อย่าลืมภูมิใจในตัวเองนะ ❤️"
+            ],
+
+            wish: [
+                "วันนี้ขอให้เจอแต่สิ่งดี ๆ นะ 💐",
+                "ขอให้มีแต่พลังบวก และเรื่องน่ารัก ๆ เข้ามาในชีวิต 💌",
+                "ขอให้สมหวังในสิ่งที่ตั้งใจไว้ทุกอย่าง 🌟",
+                "ขอให้วันนี้หัวใจของเธอเบาเหมือนกลีบดอกไม้ 🌸",
+                "ขอให้วันของเธอเต็มไปด้วยรอยยิ้ม ☀️",
+                "ขอให้โชคดีตลอดทั้งวันเลยนะ 🍀",
+                "ขอให้เธอมีความสุขมากกว่าที่เมื่อวาน 💕",
+                "ขอให้สิ่งที่เธอหวังกลายเป็นจริงในเวลาที่เหมาะสม 🌈",
+                "ขอให้วันนี้ของเธออบอุ่นเหมือนอ้อมกอด 🤍",
+                "ขอให้เธอเจอแต่คนใจดีและสิ่งดี ๆ รอบตัว 🌷",
+                "ขอให้ฟ้าสดใสเหมือนรอยยิ้มของเธอเลยนะ ☀️",
+                "ขอให้หัวใจของเธอสงบและสบายตลอดวัน 🌿",
+                "ขอให้เธอมีแรงใจสำหรับทุกสิ่งที่ต้องเผชิญ 💪",
+                "ขอให้วันพรุ่งนี้ของเธอสดใสกว่าเดิมอีกเท่าตัว 🌤️",
+                "ขอให้วันนี้มีเรื่องดี ๆ เล็ก ๆ มาให้ยิ้ม 😊",
+                "ขอให้เธอเจอคนที่พูดด้วยแล้วรู้สึกสบายใจ 💗",
+                "ขอให้ความเหนื่อยที่มีค่อย ๆ จางไป 💕",
+                "ขอให้วันนี้เต็มไปด้วยความสุขที่ไม่ต้องพยายาม 🌼",
+                "ขอให้ใจของเธอเบาเหมือนสายลมยามเช้า 🍃",
+                "ขอให้ทุกเรื่องราวดำเนินไปอย่างราบรื่น 🕊️",
+                "ขอให้เธอได้พักใจจากสิ่งที่ทำให้เหนื่อย 💫",
+                "ขอให้วันนี้มีแต่รอยยิ้มและเสียงหัวเราะ 🎶",
+                "ขอให้เธอมีพลังพอจะผ่านวันยาก ๆ ไปได้ ❤️",
+                "ขอให้โลกใจดีกับเธอเสมอ 🌎",
+                "ขอให้ทุกปัญหามีคำตอบที่ทำให้เธอยิ้มได้ 🌷",
+                "ขอให้ดวงอาทิตย์ยิ้มให้เธอในทุกเช้า ☀️",
+                "ขอให้เธอรู้สึกภูมิใจในตัวเองทุกวัน 💖",
+                "ขอให้มีเหตุผลดี ๆ ให้ยิ้มตลอดทั้งวัน 🌸",
+                "ขอให้เธอได้เจอเรื่องดีที่ไม่คาดคิด 💫",
+                "ขอให้เธอหัวเราะจนลืมความเครียดทั้งหมดไปเลย 😂",
+                "ขอให้คืนนี้เธอหลับสบาย ฝันดี และตื่นมาพร้อมพลังใหม่ 🌙",
+                "ขอให้สิ่งดี ๆ วิ่งเข้ามาในชีวิตเธออย่างไม่หยุด 💐",
+                "ขอให้วันนี้ของเธอเต็มไปด้วยแสงแดดแห่งความสุข ☀️",
+                "ขอให้ทุกสิ่งที่เธอตั้งใจไว้สำเร็จตามหวัง ❤️",
+                "ขอให้ชีวิตเธอเต็มไปด้วยผู้คนที่รักและเข้าใจ 🌷",
+                "ขอให้ทุกก้าวของเธอมีความหมาย 🌿",
+                "ขอให้เธอไม่ต้องเหนื่อยกับสิ่งที่เกินควรแบก 💕",
+                "ขอให้รอยยิ้มของเธอส่องแสงให้ใครหลายคนได้อบอุ่น 🫶",
+                "ขอให้วันนี้เริ่มต้นและจบลงด้วยความสุข 🌼",
+                "ขอให้เธอมีเวลาพักใจจากโลกวุ่นวาย 🍃",
+                "ขอให้เธอได้ยินคำพูดดี ๆ จากใครสักคนในวันนี้ 💌",
+                "ขอให้ทุกเช้าที่ตื่นมามีความหวังใหม่เสมอ 🌅",
+                "ขอให้สิ่งที่เธอกังวล ค่อย ๆ คลายลงทีละนิด 🌈",
+                "ขอให้วันนี้มีเรื่องน่ารักเล็ก ๆ มาให้ยิ้มอยู่บ่อย ๆ 💗",
+                "ขอให้เธอรู้สึกว่าชีวิตยังอบอุ่นเสมอ แม้วันจะเหนื่อย ❤️",
+                "ขอให้ทุกการเริ่มต้นของเธอเต็มไปด้วยแรงใจ 🌻",
+                "ขอให้หัวใจของเธอไม่เหนื่อยกับการรักใครอีกต่อไป 🕊️",
+                "ขอให้วันนี้มีแสงแดดในใจ แม้จะไม่มีแสงบนฟ้า ☀️",
+                "ขอให้คืนนี้เต็มไปด้วยฝันดีและความสงบ 🌙",
+                "ขอให้พรุ่งนี้ของเธอสวยงามยิ่งกว่าวันนี้ 🌷"
+            ],
+
+            affirm: [
+                "เธอมีคุณค่าเสมอ ไม่ต้องพิสูจน์อะไรอีกแล้ว ❤️",
+                "เราเชื่อในตัวเธอมากเลยนะ เธอคือคนพิเศษสุด ๆ 🌈",
+                "จำไว้นะ เธอเก่งกว่าที่ตัวเองคิดไว้เยอะเลย 💗",
+                "เธอคู่ควรกับความรักและความสุขเสมอ 🌸",
+                "เธอไม่ต้องเป็นที่ชอบของใครทุกคน แค่รักตัวเองให้ได้ก็พอ 💕",
+                "โลกนี้ดีขึ้นเพราะมีเธออยู่ 🌍",
+                "เธอคือแสงเล็ก ๆ ที่ทำให้ใครหลายคนยิ้มได้ ☀️",
+                "ความผิดพลาดไม่ทำให้เธอน้อยค่าลงเลย 💫",
+                "เธอไม่จำเป็นต้องสมบูรณ์แบบเพื่อจะมีคุณค่า 🕊️",
+                "แค่เป็นตัวเองก็สวยงามที่สุดแล้ว 💖",
+                "เธอไม่ต้องเปรียบเทียบกับใคร เพราะเธอมีเส้นทางของตัวเอง 🌷",
+                "เธอเป็นคนพิเศษ แม้ในวันที่เธอไม่รู้สึกแบบนั้น ❤️",
+                "เธอสมควรได้รับการพักผ่อน ความสุข และความรัก 💐",
+                "เธอเป็นแรงบันดาลใจให้ใครบางคนโดยไม่รู้ตัว 🌻",
+                "เธอไม่ต้องทำทุกอย่างถูกต้อง แค่พยายามก็พอ 🌿",
+                "เธอมีสิทธิ์จะเริ่มต้นใหม่กี่ครั้งก็ได้ 💕",
+                "ไม่มีใครเหมือนเธอ และนั่นคือความงดงามที่สุด 🌟",
+                "เธอมีค่ามากกว่าที่ตาใครจะมองเห็น 💗",
+                "เธอคือคนที่น่ารักในแบบของตัวเอง ไม่ต้องเปลี่ยนเพื่อใคร 🤍",
+                "เธอเพียงพอแล้ว แม้ในวันที่รู้สึกไม่มั่นใจ 🌼",
+                "เธอคือเรื่องราวที่สวยงามของชีวิตใครบางคน 💫",
+                "เธอมีพลังพอจะเปลี่ยนแปลงชีวิตตัวเองได้เสมอ 🌈",
+                "เธอมีคุณค่ามากเกินกว่าจะให้ใครมาตัดสิน ❤️",
+                "ความผิดหวังไม่ใช่จุดจบ มันคือส่วนหนึ่งของการเติบโต 🌱",
+                "เธอไม่ต้องเก่งกว่าใคร แค่ไม่ลืมยิ้มให้ตัวเองก็พอ 😊",
+                "เธอเป็นคนเก่ง แม้ในวันที่ไม่มีใครบอก 🌸",
+                "แค่เธอหายใจอยู่ก็เป็นสิ่งที่น่าขอบคุณแล้ว 💕",
+                "เธอมีสิทธิ์ที่จะภูมิใจในตัวเองได้ทุกวัน 🌷",
+                "เธอไม่จำเป็นต้องเปลี่ยนเพื่อจะถูกรัก เพราะเธอน่ารักอยู่แล้ว 💖",
+                "ความจริงที่สวยงามคือ เธอไม่ต้องพยายามเป็นใครทั้งนั้น 🕊️",
+                "เธอมีแสงในตัวเอง แม้ในวันที่ฟ้ามืดมน 🌙",
+                "เธอคือความอบอุ่นในโลกที่วุ่นวายใบนี้ 💗",
+                "เธอคือคนสำคัญของตัวเองเสมอ อย่าลืมตรงนี้นะ ❤️",
+                "ไม่มีใครสามารถแทนที่เธอได้ 🌻",
+                "เธอคือหลักฐานว่าความอ่อนโยนยังมีอยู่ในโลกนี้ 🌸",
+                "เธอไม่จำเป็นต้องสมบูรณ์แบบเพื่อจะถูกยอมรับ 🌿",
+                "เธอเป็นคนที่น่าภูมิใจมาก แม้วันที่เธอไม่เห็นเอง 🌼",
+                "เธอมีสิทธิ์จะใช้ชีวิตในแบบของตัวเองอย่างสง่างาม 🦋",
+                "เธอเป็นทั้งแสงและความอบอุ่นในโลกใบนี้ 🌞",
+                "เธอคือความสุขของใครบางคนโดยไม่รู้ตัว 💫",
+                "เธอมีค่าในทุกช่วงเวลา แม้ตอนที่ไม่ได้ทำอะไรเลย 💕",
+                "เธอคือผลงานศิลปะที่ไม่ต้องเปรียบเทียบกับใคร 🎨",
+                "เธอมีหัวใจที่สวยงามมาก อย่าลืมรักษามันไว้นะ 🤍",
+                "เธอไม่จำเป็นต้องแข็งแกร่งเสมอไป แค่ไม่ลืมกลับมายืนใหม่ก็พอ 🌈",
+                "เธอคู่ควรกับความรักที่อ่อนโยนเสมอ 💗",
+                "เธอเป็นเวอร์ชันที่ดีที่สุดของตัวเองในตอนนี้แล้ว ❤️",
+                "ไม่มีคำว่า “น้อยไป” สำหรับเธอ เพราะเธอเพียงพอเสมอ 🌸",
+                "เธอไม่ต้องรอให้ใครมาบอกว่าเก่ง เพราะเธอเก่งอยู่แล้ว 💕",
+                "เธอมีคุณค่าแค่เพราะเป็น “เธอ” 🌷",
+                "โลกนี้โชคดีมากที่มีเธออยู่ด้วย ☀️"
+            ],
+
+            break: [
+                "พักสายตาเถอะนะ ☕ ลุกไปยืดเส้น 2 นาทีแล้วกลับมาสู้ใหม่!",
+                "ลองออกไปเดินรับลมหน่อยไหม 🍃 ใจจะเบาขึ้นเยอะเลย",
+                "อย่าลืมพักหัวใจของเธอบ้างนะ มันก็เหนื่อยเหมือนกัน 💕",
+                "ไปหาน้ำเย็น ๆ ดื่มหน่อยสิ ร่างกายจะขอบคุณเธอมากเลย 💧",
+                "นั่งพักสักครู่ก็ได้ ไม่มีใครต้องวิ่งตลอดเวลา 🌿",
+                "ปิดจอแป๊บนึง แล้วมองท้องฟ้าบ้างนะ ☁️",
+                "ลองยิ้มให้ตัวเองในกระจกสิ สดชื่นขึ้นทันทีเลย 😊",
+                "เธอไม่ต้องรีบ ทุกอย่างรอได้ ขอแค่เธอไม่ลืมพัก ❤️",
+                "หายใจลึก ๆ แล้วปล่อยทุกอย่างไว้นอกหัวสักพัก 🌷",
+                "ไปเดินเล่นให้หัวโล่งหน่อยดีไหม 🍀",
+                "จิบชาอุ่น ๆ แล้วพักสายตาไว้กับเพลงดี ๆ สักเพลง 🎶",
+                "บางทีการหยุดพักก็เป็นส่วนหนึ่งของการก้าวไปข้างหน้า 🌱",
+                "แค่หลับตาสัก 5 นาที ใจเธอก็จะสงบขึ้นเยอะ 🌙",
+                "วางโทรศัพท์ไว้ แล้วฟังเสียงรอบตัวดูสิ 🍃",
+                "เธอไม่ต้องทำอะไรเลยก็ได้ แค่พักเฉย ๆ ก็พอ 💗",
+                "พักนิดนึงนะ แล้วค่อยกลับไปเก่งต่อได้เสมอ 💪",
+                "เปิดเพลงเบา ๆ แล้วเอนตัวบนเก้าอี้สักพัก 🎧",
+                "ไปกินของอร่อยสักอย่างสิ เธอสมควรได้พักผ่อนแล้ว 🍰",
+                "เธอทำดีมากแล้ว พักสักนิดก่อนนะ 🌻",
+                "ปล่อยให้ใจเงียบบ้างก็ได้ ไม่ต้องคิดทุกเรื่องพร้อมกัน ❤️",
+                "ลองออกไปมองฟ้าตอนเย็นดูสิ มันช่วยให้ใจเบาขึ้น 🌇",
+                "พักแป๊บนึงก็ไม่เป็นไรนะ เธอไม่ต้องเข้มแข็งตลอดเวลา 🤍",
+                "ไปเดินช้า ๆ แล้วสูดลมหายใจลึก ๆ สักครั้ง 🌿",
+                "นั่งจิบกาแฟช้า ๆ แล้วอย่าคิดอะไรซับซ้อนเลย ☕",
+                "อย่าลืมดูแลตัวเอง เหมือนที่เธอห่วงคนอื่นนะ 💞",
+                "ถ้ารู้สึกหนักเกินไป แปลว่าถึงเวลาพักแล้ว 🌷",
+                "ปล่อยให้โลกหมุนไปก่อน เธอพักได้เสมอ 🌎",
+                "วางงานไว้ก่อน แล้วฟังเสียงหัวใจของเธอสักนิด 💖",
+                "พักสมองจากทุกอย่าง แล้วให้ใจได้หายใจบ้าง 🍃",
+                "ไปยืดแขนยืดขาสักนิดนะ ร่างกายจะได้ไม่ตึง 🌿",
+                "นอนหลับตาสักครู่ แล้วค่อยเริ่มใหม่ก็ยังทัน 💤",
+                "เปิดหน้าต่างรับลมเย็น ๆ สักนิดสิ สดชื่นแน่นอน 🌬️",
+                "เธอไม่ต้องทำให้ทุกวันสมบูรณ์แบบ แค่พักบ้างก็พอ 💗",
+                "จิบชาหอม ๆ แล้วฟังเพลงโปรด มันจะดีขึ้นแน่ 🍵",
+                "แค่พักไม่กี่นาที เธอก็จะรู้สึกดีขึ้นเอง 🫶",
+                "ปล่อยให้หัวใจได้หยุดคิดถึงสิ่งที่ทำให้เหนื่อย ❤️",
+                "ไปนั่งมองพระอาทิตย์ตกสักนิดสิ สวยกว่าที่คิดนะ 🌇",
+                "ทุกอย่างรอได้ ขอแค่เธออย่าลืมดูแลตัวเอง 🌸",
+                "พักก่อนที่ความเหนื่อยจะกลายเป็นความท้อ 🌿",
+                "อย่าฝืนเลยนะ เธอก็สมควรได้พักบ้าง 💕",
+                "ปิดตาสักพัก ให้สมองได้เงียบสักนิด 🌙",
+                "ลองหัวเราะกับอะไรเล็ก ๆ น้อย ๆ ดูสิ 😄",
+                "พักเถอะ เธอไม่ได้ต้องเก่งตลอดเวลา 🫶",
+                "ฟังเสียงฝนตก แล้วปล่อยให้ใจได้หยุดคิดชั่วครู่ 🌧️",
+                "เธอไม่ต้องตอบทุกข้อความทันที โลกจะไม่พังหรอก ❤️",
+                "แค่พักใจแป๊บเดียว เธอก็พร้อมจะเริ่มใหม่แล้ว ☀️",
+                "ไปสูดอากาศข้างนอกบ้างนะ ลมเย็นช่วยได้เสมอ 🍃",
+                "แค่ปิดตา ฟังเพลง แล้วหายใจให้ลึกที่สุด 🌸",
+                "เธอเก่งมากแล้ว พักก่อนนะ เดี๋ยวค่อยลุยต่อ 💪",
+                "อย่าลืมว่า “การพัก” ก็เป็นส่วนหนึ่งของ “การรักตัวเอง” 💖"
+            ]
+        };
+        // ฟังก์ชันเสริม: เพิ่มประโยคใหม่ง่าย ๆ
+        // ใช้แบบ: addPhrases('tired', ['ข้อความ1', 'ข้อความ2'])
+        function addPhrases(category, lines) {
+            if (!Array.isArray(lines) || !lines.length) return;
+            if (!MESSAGE_SETS[category]) MESSAGE_SETS[category] = [];
+            MESSAGE_SETS[category].push(...lines.filter(Boolean));
+        }
+        // เสียงอ่อนโยนตอนส่งกำลังใจ
+        function playSoftSound() {
+            const Ctx = window.AudioContext || window.webkitAudioContext;
+            if (!Ctx) return;
+            const ctx = new Ctx();
+
+            // ตัวช่วยสร้างโน้ตสั้น ๆ พร้อม envelope
+            const ping = (freq = 660, start = 0, dur = 0.22) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'triangle';     // โทนนุ่มน่ารักกว่า sine ที่ทึบหรือ square ที่แหลม
+                osc.frequency.value = freq;
+
+                // ADSR เบา ๆ: attack -> decay -> release
+                const a = 0.01, d = 0.08, s = 0.15, r = 0.12;
+                const t0 = ctx.currentTime + start;
+
+                gain.gain.setValueAtTime(0.0001, t0);
+                gain.gain.linearRampToValueAtTime(0.08, t0 + a);                    // attack
+                gain.gain.exponentialRampToValueAtTime(0.03, t0 + a + d);            // decay to sustain
+                gain.gain.setTargetAtTime(0.0, t0 + dur, r);                         // release
+
+                // เล็กน้อยใส่ high-pass กันความทุ้มล้น (ทำให้ใสขึ้น)
+                const hp = ctx.createBiquadFilter();
+                hp.type = 'highpass';
+                hp.frequency.value = 180;
+
+                osc.connect(gain).connect(hp).connect(ctx.destination);
+                osc.start(t0);
+                osc.stop(t0 + dur + r + 0.05);
+            };
+
+            // ทำเป็นคู่โน้ต “ติ๊งติ้ง” น่ารัก (ขึ้นเพียงครึ่งเสียงเล็กน้อย)
+            ping(660, 0.00, 0.22);  // E5 ~ 659.25Hz
+            ping(784, 0.08, 0.20);  // G5 ~ 783.99Hz ไล่ต่อมาให้รู้สึกวิ้ง ๆ
+        }
+        function randomFrom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+        // ปุ่มกำลังใจ
+        $('#giftBtn').addEventListener('click', () => {
+            const cats = Object.keys(MESSAGE_SETS);
+            const cat = randomFrom(cats);
+            const msg = randomFrom(MESSAGE_SETS[cat]);
+            toast(msg); hearts(); playSoftSound();
+        });
+        $('#igBtn').addEventListener('click', () => {
+            window.open('https://www.instagram.com/karan_n.t/', '_blank');
+            toast('เปิด IG แล้วน้า 💕'); hearts(); playSoftSound();
+        });
+        document.querySelectorAll('.chip').forEach(ch => {
+            ch.addEventListener('click', () => {
+                const cat = ch.dataset.cat;
+                const arr = MESSAGE_SETS[cat] || [];
+                const msg = arr.length ? randomFrom(arr) : 'วันนี้ยังไม่มีข้อความสำหรับหมวดนี้น้า 💗';
+                toast(msg); hearts(); playSoftSound();
+            });
+        });
+        // ==== /Encouragement ====
+
+        $('#plantType').addEventListener('change', e => {
+            const unlock = getUnlocks();
+            if (!unlock.plants[e.target.value]) { toast('ยังไม่ปลดล็อกชนิดนี้น้า'); refreshPlantUI(); return; }
+            refreshPlantUI();
+        });
+        $('#petType').addEventListener('change', e => {
+            const unlock = getUnlocks();
+            if (!unlock.pets[e.target.value]) { toast('ยังไม่ปลดล็อกชนิดนี้น้า'); refreshPetUI(); return; }
+            refreshPetUI();
+        });
+
+        $('#waterBtn').addEventListener('click', () => {
+            const type = $('#plantType').value;
+            spend(GAME.COST_WATER, () => { addExpTo('plant', type, GAME.EXP_WATER); toast('รดน้ำให้ต้นไม้แล้ว 🌱💧'); hearts(); });
+        });
+        $('#fertBtn').addEventListener('click', () => {
+            const type = $('#plantType').value;
+            spend(GAME.COST_FERT, () => { addExpTo('plant', type, GAME.EXP_FERT); toast('ใส่ปุ๋ยแล้ว ✨'); hearts('✨'); });
+        });
+        $('#feedBtn').addEventListener('click', () => {
+            const type = $('#petType').value;
+            spend(GAME.COST_FEED, () => { addExpTo('pet', type, GAME.EXP_FEED); toast('ให้อาหารแล้ว 🍗'); hearts('🍗'); });
+        });
+        $('#playBtn').addEventListener('click', () => {
+            const type = $('#petType').value;
+            spend(GAME.COST_PLAY, () => { addExpTo('pet', type, GAME.EXP_PLAY); toast('เล่นด้วยกันสนุกมาก! 🎾'); hearts('🎾'); });
+        });
+
+        document.querySelectorAll('.tab').forEach(t => {
+            t.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+                t.classList.add('active');
+                const key = t.dataset.panel;
+                document.querySelectorAll('.panel').forEach(p => p.classList.remove('show'));
+                $('#panel-' + key).classList.add('show');
+            });
+        });
+
+        $('#summaryBtn').addEventListener('click', () => { renderSummary(); $('.modal').classList.add('show'); $('.modal').setAttribute('aria-hidden', 'false'); });
+        $('#summaryClose').addEventListener('click', () => { $('.modal').classList.remove('show'); $('.modal').setAttribute('aria-hidden', 'true'); });
+        $('.modal').addEventListener('click', (e) => { if (e.target.classList.contains('modal')) { $('.modal').classList.remove('show'); $('.modal').setAttribute('aria-hidden', 'true'); } });
+
+        $('#refreshBtn').addEventListener('click', () => { tick(); toast('อัปเดตเวลาเรียบร้อย ✨'); });
+
+        (function init() {
+            if (localStorage.getItem(LS.PLANTS) === null) setPlants(clone(defaultPlants));
+            if (localStorage.getItem(LS.PETS) === null) setPets(clone(defaultPets));
+            if (localStorage.getItem(LS.UNLOCKS) === null) setUnlocks(clone(defaultUnlock));
+            refreshPlantUI(); refreshPetUI();
+            renderQuests();
+            tick(); setInterval(tick, 1000);
+            document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') tick(); });
+        })();
+    </script>
+</body>
+
+</html>
